@@ -4,9 +4,10 @@ import { Alert } from '../helpers/notifications';
 import Editor from './Editor';
 import './App.css';
 
-const App = () => (
+const App = props => (
+  (() => { console.log(`props: ${props}`) })() ||
   <div>
-    <Route path="/events/:id?" component={Editor} />
+    <Route path="/events/:id?" {...props} render={routeProps => <Editor {...props} {...routeProps} />} />
     <Alert stack={{ limit: 3 }} />
   </div>
 );

@@ -1,15 +1,13 @@
-/* global document */
-
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import App from '../components/App';
+import ReactOnRails from 'react-on-rails';
+import Routes from '../components/App';
 
-document.addEventListener('DOMContentLoaded', () => {
-  render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>,
-    document.querySelector('#root'),
-  );
-});
+const Application = props => (
+  <BrowserRouter>
+    <Routes {...props} />
+  </BrowserRouter>
+);
+
+ReactOnRails.register({Application});

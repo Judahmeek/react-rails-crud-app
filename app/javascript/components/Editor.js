@@ -17,19 +17,12 @@ class Editor extends React.Component {
     super(props);
 
     this.state = {
-      events: null,
+      events: props.events,
     };
 
     this.addEvent = this.addEvent.bind(this);
     this.deleteEvent = this.deleteEvent.bind(this);
     this.updateEvent = this.updateEvent.bind(this);
-  }
-
-  componentDidMount() {
-    axios
-      .get('/api/events.json')
-      .then(response => this.setState({ events: response.data }))
-      .catch(handleAjaxError);
   }
 
   addEvent(newEvent) {
@@ -83,7 +76,7 @@ class Editor extends React.Component {
 
   render() {
     const { events } = this.state;
-    if (events === null) return null;
+    if (events === undefined) return null;
 
     const { match } = this.props;
     const eventId = match.params.id;
