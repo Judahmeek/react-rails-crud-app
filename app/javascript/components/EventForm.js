@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Pikaday from 'pikaday';
 import { Link } from 'react-router-dom';
-import { formatDate, isEmptyObject, validateEvent } from '../helpers/helpers';
+import { isEmptyObject, validateEvent } from '../helpers/helpers';
 import EventNotFound from './EventNotFound';
-import 'pikaday/css/pikaday.css';
 
 class EventForm extends React.Component {
   constructor(props) {
@@ -17,20 +15,6 @@ class EventForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.dateInput = React.createRef();
-  }
-
-  componentDidMount() {
-    /* eslint-disable no-new */
-    new Pikaday({
-      field: this.dateInput.current,
-      toString: date => formatDate(date),
-      onSelect: (date) => {
-        const formattedDate = formatDate(date);
-        this.dateInput.current.value = formattedDate;
-        this.updateEvent('event_date', formattedDate);
-      },
-    });
   }
 
   componentWillReceiveProps({ event }) {
@@ -120,8 +104,8 @@ class EventForm extends React.Component {
                 type="text"
                 id="event_date"
                 name="event_date"
-                ref={this.dateInput}
                 autoComplete="off"
+                placeholder="YYYY-MM-DD"
                 value={event.event_date}
                 onChange={this.handleInputChange}
               />
